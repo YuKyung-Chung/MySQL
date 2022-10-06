@@ -1,0 +1,15 @@
+CREATE TABLE `users` (
+  `id` INT PRIMARY KEY AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL
+);
+
+CREATE TABLE `content` (
+  `id` int PRIMARY KEY AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `body` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT (current_timestamp),
+  `userId` int
+);
+
+ALTER TABLE `content` ADD FOREIGN KEY (`userId`) REFERENCES `users` (`id`);
