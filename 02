@@ -1,0 +1,35 @@
+CREATE TABLE user (
+  id int not NULL PRIMARY KEY auto_increment default NULL,
+  name varchar(255) not NULL default NULL,
+  email varchar(255) not NULL default NULL,
+  roleId int,
+);
+
+CREATE TABLE content (
+  id int not NULL PRIMARY KEY AUTO_INCREMENT,
+  title varchar(255) not NULL DEFAULT NULL,
+  body varchar(255) not NULL DEFAULT NULL,
+  created_at timestamp not NULL DEFAULT CURRENT_TIMESTAMP,
+  userId int DEFAULT NULL,
+);
+
+CREATE TABLE role (
+  id int not NULL PRIMARY KEY AUTO_INCREMENT,
+  name varchar(255) not NULL
+);
+
+CREATE TABLE category (
+  id int not NULL PRIMARY KEY AUTO_INCREMENT,
+  name varchar(255) not NULL
+);
+
+CREATE TABLE content_category (
+  id int not NULL PRIMARY KEY AUTO_INCREMENT,
+  contentId int not NULL,
+  categoryId int not NULL
+);
+
+ALTER TABLE content ADD FOREIGN KEY (userId) REFERENCES user (id);
+ALTER TABLE user ADD FOREIGN KEY (roleId) REFERENCES role (id);
+ALTER TABLE content_category ADD FOREIGN KEY (contentId) REFERENCES content (id);
+ALTER TABLE content_category ADD FOREIGN KEY (categoryId) REFERENCES category (id);
